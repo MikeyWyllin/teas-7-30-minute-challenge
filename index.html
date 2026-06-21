@@ -1,0 +1,132 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <meta name="theme-color" content="#080b10" />
+  <title>TEAS 7 30-Minute Challenge</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app-shell">
+    <header class="hero">
+      <div class="brand-row">
+        <div class="logo-mark">T7</div>
+        <div>
+          <p class="eyebrow">TEAS 7 Practice App</p>
+          <h1>Go 25–0.</h1>
+        </div>
+      </div>
+      <div class="timer-box" aria-live="polite">
+        <span id="timerLabel">30:00</span>
+        <small>game clock</small>
+      </div>
+    </header>
+
+    <main>
+      <section id="startScreen" class="panel start-panel">
+        <div class="headline-card">
+          <p class="eyebrow">Version 2</p>
+          <h2>Pick your subjects. Run the clock.</h2>
+          <p class="subcopy">25 random TEAS-style questions. Multiple choice, multi-select, and true/false only.</p>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat"><strong>250</strong><span>question bank</span></div>
+          <div class="stat"><strong>25</strong><span>per test</span></div>
+          <div class="stat"><strong>30:00</strong><span>timer</span></div>
+          <div class="stat"><strong id="attemptsStat">0</strong><span>saved attempts</span></div>
+        </div>
+
+        <div class="setup-box">
+          <label for="seedInput">Set code</label>
+          <div class="seed-row">
+            <input id="seedInput" type="text" autocomplete="off" spellcheck="false" />
+            <button id="randomSeedBtn" type="button" class="secondary-btn">Random</button>
+          </div>
+          <p class="micro">Same set code + same subjects = same 25 questions. Use Random for a fresh test.</p>
+        </div>
+
+        <div class="setup-box">
+          <div class="setup-header">
+            <div>
+              <label>Choose subjects</label>
+              <p class="micro no-top">Any combo works. Pick one subject, two subjects, or all four.</p>
+            </div>
+            <button id="allSubjectsBtn" type="button" class="tiny-btn">All 4</button>
+          </div>
+
+          <div id="subjectSelector" class="subject-selector" aria-label="Subject selection">
+            <label class="subject-card"><input type="checkbox" value="Reading" checked><span><strong>Reading</strong><small id="countReading">6 questions</small></span></label>
+            <label class="subject-card"><input type="checkbox" value="Math" checked><span><strong>Math</strong><small id="countMath">6 questions</small></span></label>
+            <label class="subject-card"><input type="checkbox" value="Science" checked><span><strong>Science</strong><small id="countScience">7 questions</small></span></label>
+            <label class="subject-card"><input type="checkbox" value="English" checked><span><strong>English</strong><small id="countEnglish">6 questions</small></span></label>
+          </div>
+          <p id="subjectPlanText" class="micro"></p>
+        </div>
+
+        <div id="allTimeStats" class="all-time-box"></div>
+
+        <div class="button-row">
+          <button id="startBtn" class="primary-btn">Start 30-Minute Test</button>
+          <button id="resumeBtn" class="secondary-btn hidden">Resume Saved Test</button>
+          <button id="clearStatsBtn" class="secondary-btn">Clear Stats</button>
+        </div>
+      </section>
+
+      <section id="quizScreen" class="panel quiz-panel hidden">
+        <div class="quiz-topbar">
+          <div>
+            <p class="eyebrow" id="setCodeLabel">Set</p>
+            <h2 id="questionCounter">Question 1 of 25</h2>
+          </div>
+          <div class="mini-score"><span id="answeredCount">0</span>/25 answered</div>
+        </div>
+
+        <div id="activeSubjects" class="subject-pills"></div>
+        <div id="questionNav" class="question-nav" aria-label="Question navigation"></div>
+
+        <article class="question-card">
+          <div class="question-meta">
+            <span id="subjectBadge" class="badge">Science</span>
+            <span id="topicBadge" class="topic">Topic</span>
+            <span id="typeBadge" class="type-badge">Multiple Choice</span>
+          </div>
+          <div id="questionStem" class="question-stem"></div>
+          <div id="choices" class="choices"></div>
+        </article>
+
+        <div class="button-row quiz-actions">
+          <button id="prevBtn" class="secondary-btn">Back</button>
+          <button id="nextBtn" class="primary-btn">Next</button>
+          <button id="submitBtn" class="danger-btn">Submit</button>
+        </div>
+      </section>
+
+      <section id="resultsScreen" class="panel results-panel hidden">
+        <div class="scoreboard-final">
+          <p class="eyebrow">Final Score</p>
+          <h2 id="finalRecord">0–25</h2>
+          <p id="finalPercent">0%</p>
+        </div>
+
+        <div id="breakdown" class="breakdown"></div>
+        <div id="resultsAllTimeStats" class="all-time-box"></div>
+
+        <div class="button-row">
+          <button id="newSetBtn" class="primary-btn">Generate New Test</button>
+          <button id="changeSubjectsBtn" class="secondary-btn">Change Subjects</button>
+          <button id="reviewMissedBtn" class="secondary-btn">Review Missed</button>
+          <button id="copyResultsBtn" class="secondary-btn">Copy Results for ChatGPT</button>
+          <button id="downloadResultsBtn" class="secondary-btn">Download Results</button>
+        </div>
+
+        <div id="reviewArea" class="review-area"></div>
+      </section>
+    </main>
+  </div>
+
+  <script src="questions.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>
